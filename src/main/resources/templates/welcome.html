@@ -1,0 +1,44 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Welcome</title>
+    <link rel="stylesheet" type="text/css" href="../bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="../custom.css"/>
+</head>
+<body>
+<h2>Thank you for visiting our website! To get early access to our planned projects, please fill in the following quick
+    questionnaire.
+</h2>
+<!--/*@thymesVar id="formInfo" type="com.greenfox.exams.spring.models.FormInfo"*/-->
+<form id="postform" class="form-horizontal" action="#" th:action="@{/welcome}" th:object="${formInfo}"
+      method="post">
+    <div class="form-group" th:classappend="${#fields.hasErrors('text')} ? 'has-error bg-danger'">
+        <label for="text" class="control-label">Describe your experience with Green Fox Academy so far:</label><br/>
+        <span class="warning" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Content Error.</span><br/>
+        <!--/*@thymesVar id="customValid" type="java.lang.Boolean"*/-->
+        <span class="warning" th:if="${customValid}">Warning! Experience described not positive enough!</span>
+        <textarea id="text" class="form-control" th:field="*{text}" autofocus="autofocus"></textarea>
+    </div>
+    <div class="form-group" th:classappend="${#fields.hasErrors('rating')} ? 'has-error bg-danger'">
+        <label for="number" class="control-label">On a scale of 1 to 10, how likely are you to recommend Green
+            Fox Academy to a
+            friend?</label><br/>
+        <span class="warning" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}">Content Error.</span><br/>
+        <input id="number" class="form-control" th:field="*{rating}" type="number"/>
+    </div>
+    <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? 'has-error bg-danger'">
+        <label for="email" class="control-label">Your email address:</label><br/>
+        <span class="warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Content Error.</span><br/>
+        <input id="email" class="form-control" th:field="*{email}" type="email"/>
+    </div>
+    <div class="form-group">
+        <label for="submit" class="control-label"></label>
+        <input id="submit" class="form-control btn btn-primary" type="submit" value="Submit Feedback!"/>
+    </div>
+</form>
+
+</body>
+</html>
+
+
